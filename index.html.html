@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>7-Minute Timer</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #0d1117;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      flex-direction: column;
+      text-align: center;
+    }
+    h1 {
+      font-size: 5rem;
+      margin: 0;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 8px;
+      background-color: #2ea043;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #238636;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="timer">07:00</h1>
+  <button onclick="startTimer()">Start Timer</button>
+
+  <script>
+    let totalSeconds = 7 * 60; // 7 minutes
+    let interval = null;
+
+    function startTimer() {
+      if (interval) return; // Prevent multiple timers
+      interval = setInterval(() => {
+        if (totalSeconds <= 0) {
+          clearInterval(interval);
+          document.getElementById('timer').textContent = "TIME'S UP!";
+          document.body.style.backgroundColor = "#a60000";
+          return;
+        }
+
+        totalSeconds--;
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+        document.getElementById('timer').textContent =
+          `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      }, 1000);
+    }
+  </script>
+
+</body>
+</html>
